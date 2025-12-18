@@ -29,9 +29,9 @@ export function Layout({ children, hideNav = false }: LayoutProps) {
             className="flex items-center gap-2 font-display text-lg font-semibold"
           >
             <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-              E
+              
             </span>
-            <span>Curated</span>
+            <span>Khalid's Store</span>
           </Link>
 
           {/* Desktop Navigation */}

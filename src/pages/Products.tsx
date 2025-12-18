@@ -1,17 +1,18 @@
-import { useSearchParams } from 'react-router-dom';
-import { Filter } from 'lucide-react';
-import { Layout } from '@/components/layout/Layout';
-import { ProductCard } from '@/components/product/ProductCard';
-import { Button } from '@/components/ui/button';
-import { useProducts, useCategories } from '@/hooks/useProducts';
-import { Skeleton } from '@/components/ui/skeleton';
-import { cn } from '@/lib/utils';
+import { useSearchParams } from "react-router-dom";
+import { Filter } from "lucide-react";
+import { Layout } from "@/components/layout/Layout";
+import { ProductCard } from "@/components/product/ProductCard";
+import { Button } from "@/components/ui/button";
+import { useProducts, useCategories } from "@/hooks/useProducts";
+import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/lib/utils";
 
 export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const categorySlug = searchParams.get('category');
-  
-  const { data: products, isLoading: loadingProducts } = useProducts(categorySlug);
+  const categorySlug = searchParams.get("category");
+
+  const { data: products, isLoading: loadingProducts } =
+    useProducts(categorySlug);
   const { data: categories } = useCategories();
 
   const handleCategoryChange = (slug: string | null) => {
@@ -29,10 +30,10 @@ export default function Products() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="font-display text-2xl font-semibold text-foreground">
-              {categorySlug 
-                ? categories?.find(c => c.slug === categorySlug)?.name || 'Products'
-                : 'All Products'
-              }
+              {categorySlug
+                ? categories?.find((c) => c.slug === categorySlug)?.name ||
+                  "Products"
+                : "All Products"}
             </h1>
             <p className="text-sm text-muted-foreground mt-1">
               {products?.length || 0} items
@@ -50,10 +51,10 @@ export default function Products() {
             variant="ghost"
             size="sm"
             className={cn(
-              'rounded-full whitespace-nowrap px-4 flex-shrink-0 transition-all',
-              !categorySlug 
-                ? 'bg-foreground text-background hover:bg-foreground/90' 
-                : 'bg-muted text-muted-foreground hover:bg-muted/80'
+              "rounded-full whitespace-nowrap px-4 flex-shrink-0 transition-all",
+              !categorySlug
+                ? "bg-foreground text-background hover:bg-foreground/90"
+                : "bg-muted text-muted-foreground hover:bg-muted/80"
             )}
             onClick={() => handleCategoryChange(null)}
           >
@@ -65,10 +66,10 @@ export default function Products() {
               variant="ghost"
               size="sm"
               className={cn(
-                'rounded-full whitespace-nowrap px-4 flex-shrink-0 transition-all',
+                "rounded-full whitespace-nowrap px-4 flex-shrink-0 transition-all",
                 categorySlug === category.slug
-                  ? 'bg-foreground text-background hover:bg-foreground/90'
-                  : 'bg-muted text-muted-foreground hover:bg-muted/80'
+                  ? "bg-foreground text-background hover:bg-foreground/90"
+                  : "bg-muted text-muted-foreground hover:bg-muted/80"
               )}
               onClick={() => handleCategoryChange(category.slug)}
             >
@@ -98,7 +99,7 @@ export default function Products() {
                 id={product.id}
                 name={product.name}
                 price={Number(product.price)}
-                imageUrl={product.image_url || ''}
+                imageUrl={product.image_url || ""}
                 description={product.description || undefined}
                 className={`animate-fade-up stagger-${(index % 4) + 1}`}
               />

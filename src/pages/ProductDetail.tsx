@@ -1,34 +1,34 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Heart, Minus, Plus, ShoppingBag } from 'lucide-react';
-import { useState } from 'react';
-import { Layout } from '@/components/layout/Layout';
-import { Button } from '@/components/ui/button';
-import { useProduct } from '@/hooks/useProducts';
-import { useCartStore } from '@/store/cartStore';
-import { useToast } from '@/hooks/use-toast';
-import { Skeleton } from '@/components/ui/skeleton';
+import { useParams, useNavigate } from "react-router-dom";
+import { ArrowLeft, Heart, Minus, Plus, ShoppingBag } from "lucide-react";
+import { useState } from "react";
+import { Layout } from "@/components/layout/Layout";
+import { Button } from "@/components/ui/button";
+import { useProduct } from "@/hooks/useProducts";
+import { useCartStore } from "@/store/cartStore";
+import { useToast } from "@/hooks/use-toast";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [quantity, setQuantity] = useState(1);
-  
-  const { data: product, isLoading } = useProduct(id || '');
+
+  const { data: product, isLoading } = useProduct(id || "");
   const addItem = useCartStore((state) => state.addItem);
 
   const handleAddToCart = () => {
     if (!product) return;
-    
+
     for (let i = 0; i < quantity; i++) {
       addItem({
         productId: product.id,
         name: product.name,
         price: Number(product.price),
-        imageUrl: product.image_url || '',
+        imageUrl: product.image_url || "",
       });
     }
-    
+
     toast({
       title: "Added to cart",
       description: `${quantity} × ${product.name} has been added to your cart`,
@@ -53,13 +53,16 @@ export default function ProductDetail() {
       <Layout>
         <div className="flex flex-col items-center justify-center min-h-[60vh] px-4">
           <p className="text-muted-foreground mb-4">Product not found</p>
-          <Button onClick={() => navigate('/products')}>Browse Products</Button>
+          <Button onClick={() => navigate("/products")}>Browse Products</Button>
         </div>
       </Layout>
     );
   }
 
-  const categoryInfo = product.categories as { slug: string; name: string } | null;
+  const categoryInfo = product.categories as {
+    slug: string;
+    name: string;
+  } | null;
 
   return (
     <Layout hideNav>
@@ -83,7 +86,7 @@ export default function ProductDetail() {
           {/* Product Image */}
           <div className="aspect-square rounded-3xl overflow-hidden bg-muted mb-6 md:mb-0 animate-scale-up">
             <img
-              src={product.image_url || ''}
+              src={product.image_url || ""}
               alt={product.name}
               className="w-full h-full object-cover"
             />
@@ -97,33 +100,38 @@ export default function ProductDetail() {
                   {categoryInfo.name}
                 </span>
               )}
-              
+
               <h1 className="font-display text-2xl md:text-4xl font-semibold text-foreground mb-2">
                 {product.name}
               </h1>
-              
+
               <p className="text-2xl md:text-3xl font-bold text-foreground mb-4">
                 ${Number(product.price).toFixed(2)}
               </p>
-              
+
               <p className="text-muted-foreground leading-relaxed mb-6 text-lg">
-                {product.description || 'No description available.'}
+                {product.description || "No description available."}
               </p>
 
               {/* Stock Info */}
               <div className="flex items-center gap-2 mb-6">
-                <span className={`w-2 h-2 rounded-full ${product.stock_quantity > 0 ? 'bg-success' : 'bg-destructive'}`} />
+                <span
+                  className={`w-2 h-2 rounded-full ${
+                    product.stock_quantity > 0 ? "bg-success" : "bg-destructive"
+                  }`}
+                />
                 <span className="text-sm text-muted-foreground">
-                  {product.stock_quantity > 0 
+                  {product.stock_quantity > 0
                     ? `${product.stock_quantity} in stock`
-                    : 'Out of stock'
-                  }
+                    : "Out of stock"}
                 </span>
               </div>
 
               {/* Quantity Selector */}
               <div className="flex items-center gap-4 mb-8">
-                <span className="text-sm font-medium text-foreground">Quantity</span>
+                <span className="text-sm font-medium text-foreground">
+                  Quantity
+                </span>
                 <div className="flex items-center gap-3 bg-muted rounded-full p-1">
                   <Button
                     variant="ghost"
@@ -133,12 +141,18 @@ export default function ProductDetail() {
                   >
                     <Minus className="h-4 w-4" />
                   </Button>
-                  <span className="w-8 text-center font-medium">{quantity}</span>
+                  <span className="w-8 text-center font-medium">
+                    {quantity}
+                  </span>
                   <Button
                     variant="ghost"
                     size="icon"
                     className="h-8 w-8 rounded-full hover:bg-card"
-                    onClick={() => setQuantity(Math.min(product.stock_quantity, quantity + 1))}
+                    onClick={() =>
+                      setQuantity(
+                        Math.min(product.stock_quantity, quantity + 1)
+                      )
+                    }
                   >
                     <Plus className="h-4 w-4" />
                   </Button>

@@ -1,9 +1,9 @@
-import { ArrowLeft, ShoppingBag } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-import { Layout } from '@/components/layout/Layout';
-import { CartItem } from '@/components/cart/CartItem';
-import { Button } from '@/components/ui/button';
-import { useCartStore } from '@/store/cartStore';
+import { ArrowLeft, ShoppingBag } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Layout } from "@/components/layout/Layout";
+import { CartItem } from "@/components/cart/CartItem";
+import { Button } from "@/components/ui/button";
+import { useCartStore } from "@/store/cartStore";
 
 export default function Cart() {
   const navigate = useNavigate();
@@ -27,9 +27,11 @@ export default function Cart() {
             <ArrowLeft className="h-5 w-5" />
           </Button>
           <div>
-            <h1 className="font-display text-2xl font-semibold text-foreground">Cart</h1>
+            <h1 className="font-display text-2xl font-semibold text-foreground">
+              Cart
+            </h1>
             <p className="text-sm text-muted-foreground">
-              {items.length} {items.length === 1 ? 'item' : 'items'}
+              {items.length} {items.length === 1 ? "item" : "items"}
             </p>
           </div>
         </div>
@@ -45,7 +47,10 @@ export default function Cart() {
             <p className="text-muted-foreground mb-6">
               Start shopping to add items to your cart
             </p>
-            <Button onClick={() => navigate('/products')} className="btn-primary">
+            <Button
+              onClick={() => navigate("/products")}
+              className="btn-primary"
+            >
               Browse Products
             </Button>
           </div>
@@ -55,7 +60,10 @@ export default function Cart() {
             <div className="md:col-span-2 space-y-0 mb-6">
               <div className="space-y-0 mb-6">
                 {items.map((item, index) => (
-                  <div key={item.id} className={`animate-fade-up stagger-${(index % 4) + 1}`}>
+                  <div
+                    key={item.id}
+                    className={`animate-fade-up stagger-${(index % 4) + 1}`}
+                  >
                     <CartItem item={item} />
                   </div>
                 ))}
@@ -75,16 +83,20 @@ export default function Cart() {
             {/* Desktop Summary */}
             <div className="hidden md:block md:col-span-1">
               <div className="sticky top-24 p-6 bg-card rounded-xl border border-border/50 shadow-sm">
-                <h2 className="font-display text-lg font-semibold mb-4">Order Summary</h2>
+                <h2 className="font-display text-lg font-semibold mb-4">
+                  Order Summary
+                </h2>
                 <div className="space-y-3 mb-6">
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Subtotal</span>
-                    <span className="font-medium text-foreground">${subtotal.toFixed(2)}</span>
+                    <span className="font-medium text-foreground">
+                      ${subtotal.toFixed(2)}
+                    </span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Shipping</span>
                     <span className="font-medium text-foreground">
-                      {shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}
+                      {shipping === 0 ? "Free" : `$${shipping.toFixed(2)}`}
                     </span>
                   </div>
                   {shipping > 0 && (
@@ -94,12 +106,14 @@ export default function Cart() {
                   )}
                   <div className="flex justify-between pt-4 border-t border-border/50">
                     <span className="font-semibold text-foreground">Total</span>
-                    <span className="font-bold text-lg text-foreground">${total.toFixed(2)}</span>
+                    <span className="font-bold text-lg text-foreground">
+                      ${total.toFixed(2)}
+                    </span>
                   </div>
                 </div>
-                <Button 
+                <Button
                   className="w-full h-12 btn-primary font-semibold"
-                  onClick={() => navigate('/auth')}
+                  onClick={() => navigate("/auth")}
                 >
                   Checkout
                 </Button>
@@ -115,12 +129,14 @@ export default function Cart() {
           <div className="space-y-2 mb-4">
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Subtotal</span>
-              <span className="font-medium text-foreground">${subtotal.toFixed(2)}</span>
+              <span className="font-medium text-foreground">
+                ${subtotal.toFixed(2)}
+              </span>
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Shipping</span>
               <span className="font-medium text-foreground">
-                {shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}
+                {shipping === 0 ? "Free" : `$${shipping.toFixed(2)}`}
               </span>
             </div>
             {shipping > 0 && (
@@ -130,13 +146,15 @@ export default function Cart() {
             )}
             <div className="flex justify-between pt-2 border-t border-border/50">
               <span className="font-semibold text-foreground">Total</span>
-              <span className="font-bold text-lg text-foreground">${total.toFixed(2)}</span>
+              <span className="font-bold text-lg text-foreground">
+                ${total.toFixed(2)}
+              </span>
             </div>
           </div>
-          
+
           <Button
             className="w-full h-12 text-base font-semibold btn-primary"
-            onClick={() => navigate('/auth')}
+            onClick={() => navigate("/auth")}
           >
             Checkout
           </Button>

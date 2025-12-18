@@ -15,7 +15,7 @@ export default function Cart() {
 
   return (
     <Layout>
-      <div className="px-4 py-6 pb-48">
+      <div className="px-4 py-6 pb-48 md:pb-12">
         {/* Header */}
         <div className="flex items-center gap-4 mb-6">
           <Button
@@ -50,32 +50,68 @@ export default function Cart() {
             </Button>
           </div>
         ) : (
-          <>
+          <div className="md:grid md:grid-cols-3 md:gap-8">
             {/* Cart Items */}
-            <div className="space-y-0 mb-6">
-              {items.map((item, index) => (
-                <div key={item.id} className={`animate-fade-up stagger-${(index % 4) + 1}`}>
-                  <CartItem item={item} />
-                </div>
-              ))}
+            <div className="md:col-span-2 space-y-0 mb-6">
+              <div className="space-y-0 mb-6">
+                {items.map((item, index) => (
+                  <div key={item.id} className={`animate-fade-up stagger-${(index % 4) + 1}`}>
+                    <CartItem item={item} />
+                  </div>
+                ))}
+              </div>
+
+              {/* Clear Cart */}
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-muted-foreground hover:text-destructive"
+                onClick={clearCart}
+              >
+                Clear Cart
+              </Button>
             </div>
 
-            {/* Clear Cart */}
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-muted-foreground hover:text-destructive"
-              onClick={clearCart}
-            >
-              Clear Cart
-            </Button>
-          </>
+            {/* Desktop Summary */}
+            <div className="hidden md:block md:col-span-1">
+              <div className="sticky top-24 p-6 bg-card rounded-xl border border-border/50 shadow-sm">
+                <h2 className="font-display text-lg font-semibold mb-4">Order Summary</h2>
+                <div className="space-y-3 mb-6">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Subtotal</span>
+                    <span className="font-medium text-foreground">${subtotal.toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Shipping</span>
+                    <span className="font-medium text-foreground">
+                      {shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}
+                    </span>
+                  </div>
+                  {shipping > 0 && (
+                    <p className="text-xs text-primary">
+                      Add ${(50 - subtotal).toFixed(2)} more for free shipping
+                    </p>
+                  )}
+                  <div className="flex justify-between pt-4 border-t border-border/50">
+                    <span className="font-semibold text-foreground">Total</span>
+                    <span className="font-bold text-lg text-foreground">${total.toFixed(2)}</span>
+                  </div>
+                </div>
+                <Button 
+                  className="w-full h-12 btn-primary font-semibold"
+                  onClick={() => navigate('/auth')}
+                >
+                  Checkout
+                </Button>
+              </div>
+            </div>
+          </div>
         )}
       </div>
 
-      {/* Fixed Bottom Summary */}
+      {/* Fixed Bottom Summary - Mobile Only */}
       {items.length > 0 && (
-        <div className="fixed bottom-16 left-0 right-0 p-4 bg-card/95 backdrop-blur-xl border-t border-border/50 animate-slide-in-bottom">
+        <div className="fixed bottom-16 left-0 right-0 p-4 bg-card/95 backdrop-blur-xl border-t border-border/50 animate-slide-in-bottom md:hidden">
           <div className="space-y-2 mb-4">
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Subtotal</span>

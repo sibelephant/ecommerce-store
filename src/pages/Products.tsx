@@ -78,7 +78,7 @@ export default function Products() {
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
           {loadingProducts ? (
             Array.from({ length: 6 }).map((_, i) => (
               <div key={i} className="space-y-3">
@@ -88,7 +88,7 @@ export default function Products() {
               </div>
             ))
           ) : products?.length === 0 ? (
-            <div className="col-span-2 text-center py-12">
+            <div className="col-span-2 md:col-span-3 lg:col-span-4 text-center py-12">
               <p className="text-muted-foreground">No products found</p>
             </div>
           ) : (

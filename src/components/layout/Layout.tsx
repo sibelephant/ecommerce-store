@@ -23,7 +23,7 @@ export function Layout({ children, hideNav = false }: LayoutProps) {
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary/30 text-foreground">
       <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-md border-b border-border">
-        <div className="mx-auto flex max-w-4xl items-center justify-between px-4 py-4">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-8">
           <Link
             to="/"
             className="flex items-center gap-2 font-display text-lg font-semibold"
@@ -33,9 +33,28 @@ export function Layout({ children, hideNav = false }: LayoutProps) {
             </span>
             <span>Curated</span>
           </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-8">
+            {navItems.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className={cn(
+                  "text-sm font-medium transition-colors hover:text-primary",
+                  location.pathname === item.to
+                    ? "text-foreground"
+                    : "text-muted-foreground"
+                )}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
           <Link
             to="/cart"
-            className="relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card"
+            className="relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card hover:bg-accent transition-colors"
             aria-label="Cart"
           >
             <ShoppingBag className="h-5 w-5" />
@@ -48,10 +67,10 @@ export function Layout({ children, hideNav = false }: LayoutProps) {
         </div>
       </header>
 
-      <main className="mx-auto max-w-4xl pb-24">{children}</main>
+      <main className="mx-auto max-w-7xl pb-24 md:px-8">{children}</main>
 
       {!hideNav && (
-        <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-card/95 backdrop-blur-xl">
+        <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-card/95 backdrop-blur-xl md:hidden">
           <div className="mx-auto grid max-w-4xl grid-cols-4 gap-1 px-4 py-3 text-sm">
             {navItems.map((item) => {
               const Icon = item.icon;

@@ -49,7 +49,7 @@ export default function Index() {
           </Link>
         </div>
         
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
           {loadingCategories ? (
             Array.from({ length: 4 }).map((_, i) => (
               <Skeleton key={i} className="aspect-[4/5] rounded-2xl" />
@@ -77,7 +77,7 @@ export default function Index() {
           </Link>
         </div>
         
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
           {loadingProducts ? (
             Array.from({ length: 4 }).map((_, i) => (
               <div key={i} className="space-y-3">

@@ -72,7 +72,7 @@ export default function Search() {
         )}
 
         {query && isLoading && (
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
             {Array.from({ length: 4 }).map((_, i) => (
               <div key={i} className="space-y-3">
                 <Skeleton className="aspect-square rounded-2xl" />
@@ -94,7 +94,7 @@ export default function Search() {
             <p className="text-sm text-muted-foreground mb-4">
               {results.length} result{results.length !== 1 ? 's' : ''} for "{query}"
             </p>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
               {results.map((product, index) => (
                 <ProductCard
                   key={product.id}

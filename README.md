@@ -1,75 +1,94 @@
-# React + TypeScript + Vite
+# Modern Ecommerce Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive ecommerce application built with React, TypeScript, Vite, and Tailwind CSS. This project demonstrates a fully functional storefront with product browsing, cart management, and user authentication.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **🛍️ Product Browsing**: Browse featured products and explore different categories.
+- **🔍 Search**: Find products easily with built-in search functionality.
+- **🛒 Shopping Cart**: Full cart management including adding items, updating quantities, and removing products. State is managed locally using Zustand.
+- **📱 Responsive Design**: Mobile-first design ensuring a seamless experience across all devices.
+- **🔐 Authentication**: Secure user authentication powered by Supabase.
+- **🎨 Modern UI**: Beautiful and accessible UI components built with Shadcn UI and Radix UI primitives.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+- **Framework**: [React](https://react.dev/) with [TypeScript](https://www.typescriptlang.org/)
+- **Build Tool**: [Vite](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **UI Library**: [Shadcn UI](https://ui.shadcn.com/) / [Radix UI](https://www.radix-ui.com/)
+- **State Management**: [Zustand](https://github.com/pmndrs/zustand) (Cart), [TanStack Query](https://tanstack.com/query/latest) (Data Fetching)
+- **Routing**: [React Router](https://reactrouter.com/)
+- **Backend & Database**: [Supabase](https://supabase.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
 
-Note: This will impact Vite dev & build performances.
+## Getting Started
 
-## Expanding the ESLint configuration
+### Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Node.js (v18 or higher)
+- npm, yarn, or pnpm
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Installation
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+1. **Clone the repository**
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+   ```bash
+   git clone <repository-url>
+   cd ecommerce-store
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   ```
+
+3. **Environment Setup**
+
+   Create a `.env` file in the root directory and add your Supabase credentials:
+
+   ```env
+   VITE_SUPABASE_URL=your_supabase_url
+   VITE_SUPABASE_PUBLISHABLE_KEY=your_supabase_anon_key
+   ```
+
+4. **Run the development server**
+
+   ```bash
+   npm run dev
+   ```
+
+   The application will be available at `http://localhost:8080` (or the port shown in your terminal).
+
+## Project Structure
+
+```
+src/
+├── assets/          # Static assets
+├── components/      # Reusable UI components
+│   ├── cart/        # Cart-related components
+│   ├── layout/      # Layout components (Header, Footer)
+│   ├── product/     # Product-related components
+│   └── ui/          # Shadcn UI primitive components
+├── hooks/           # Custom React hooks
+├── integrations/    # Third-party integrations (Supabase)
+├── lib/             # Utility functions
+├── pages/           # Application pages (Home, Cart, Auth, etc.)
+└── store/           # Global state management (Zustand)
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Scripts
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- `npm run dev`: Start the development server.
+- `npm run build`: Build the application for production.
+- `npm run lint`: Run ESLint to check for code quality issues.
+- `npm run preview`: Preview the production build locally.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
